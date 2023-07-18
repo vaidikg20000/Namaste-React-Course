@@ -1,0 +1,8 @@
+- If we need to create local variables in react, we need to create them using useState hook.
+- Hooks are nothing but just a normal function.
+- These functions returns an array and the first element of array is your state variable.
+- In react there is one way data binding
+- React doesn't keep track of all your variables, it re renders with same value even if it's value changed (in case it is not a state variable)
+- React says to keep your variables in sync with your UI, we need to create state variables.
+- React doesn;t changes the normal varaibles, react only tract the varaibles which are state variables.
+- React re-renders just the whole component in which that state variable is present.
