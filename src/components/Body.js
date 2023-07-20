@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
 import { restaurantList } from "../constants";
 import { RestaurantCard } from "./RestaurantCard";
+import Shimmer from "./Shimmer";
 
 function filterData(input, restaurants) {
   return restaurants.filter((restaurant) =>
-    restaurant.data.name.includes(input)
+    restaurant?.data?.name?.toLowerCase().includes(input.toLowerCase())
   );
 }
 
 const Body = () => {
   const [searchInput, setSearchInput] = useState("");
-  const [restaurants, setRestaurantData] = useState(restaurantList);
+  const [allRestaurants, setAllRestaurantData] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurantData] = useState([]);
+
   useEffect(() => {
     getRestaurants();
-  },[]);
+  }, []);
 
   async function getRestaurants() {
     const data = await fetch(
@@ -21,9 +24,20 @@ const Body = () => {
     );
     const json = await data.json();
     console.log(json);
-    setRestaurantData(json?.data?.cards[2]?.data?.data?.cards)
+    setAllRestaurantData(json?.data?.cards[2]?.data?.data?.cards);
+    setFilteredRestaurantData(json?.data?.cards[2]?.data?.data?.cards);
   }
-  return (
+  // Not render component (early return)
+  if (!allRestaurants) return null;
+
+  if (filteredRestaurants.length === 0)
+    return <h1>No Matching restaurants found</h1>;
+
+  return allRestaurants?.length === 0 ? (
+    <>
+      <Shimmer />
+    </>
+  ) : (
     <>
       <div className="search-container">
         <input
@@ -38,15 +52,15 @@ const Body = () => {
         />
         <button
           onClick={() => {
-            const data = filterData(searchInput, restaurants);
-            setRestaurantData(data);
+            const data = filterData(searchInput, allRestaurants);
+            setFilteredRestaurantData(data);
           }}
         >
           Search
         </button>
       </div>
       <div className="restaurant-list">
-        {restaurants.map((restaurant) => {
+        {filteredRestaurants.map((restaurant) => {
           return (
             <RestaurantCard {...restaurant.data} key={restaurant.data.id} />
           );
