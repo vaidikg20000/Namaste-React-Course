@@ -5,17 +5,14 @@ restaurantList;
 const Shimmer = () => {
   return (
     <>
-      <h1>Shimmer Loading....</h1>
+      <div className="restaurant-list">
+        {Array(10).fill("").map((x,index) => {
+          return (
+            <div key={index} className="shimmer-card"></div>
+          );
+        })}
+      </div>
     </>
-    // <>
-    //   {restaurantList.map((x) => {
-    //     return (
-    //       <div className="restaurant-list">
-    //         <div className="shimmer-card"></div>
-    //       </div>
-    //     );
-    //   })}
-    // </>
   );
 };
 

@@ -27,8 +27,9 @@
 
 .shimmer-card{
     width: 200px;
-    height: 150px;
-    border: 1px solid black;
+    height: 200px;
+    /* border: 1px solid black; */
+    background: lightgray;
     padding: 10px;
     margin: 10px;
 }
