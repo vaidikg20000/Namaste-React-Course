@@ -14,3 +14,4 @@
 
 ## Useeffect()
 - when a setInterval is called inside useEffect, it would be called again when redirected to another homepage, so a return statement is required, where we clear the interval and so that it can be unmounted from the component.
+- React’s useEffect hook expects a cleanup function returned from it which is called when the component unmounts. Using an async function here will cause a bug as the cleanup function will never get called.
