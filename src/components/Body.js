@@ -25,8 +25,8 @@ const Body = () => {
     );
     const json = await data.json();
     console.log(json,'llll');
-    setAllRestaurantData(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setFilteredRestaurantData(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setAllRestaurantData(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilteredRestaurantData(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   }
   // Not render component (early return)
   if (!allRestaurants) return null;
