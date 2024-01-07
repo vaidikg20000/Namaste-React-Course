@@ -6,9 +6,9 @@ export const RestaurantCard = ({
   avgRating,
 }) => {
   return (
-    <div className="card">
+    <div className="w-56 p-2 m-1 shadow-lg bg-pink-50">
       <img src={IMG_CDN_LINK + cloudinaryImageId} alt="card-image" />
-      <h2>{name}</h2>
+      <h2 className="font-bold">{name}</h2>
       <h3>{cuisines.join(", ")}</h3>
       <h3>{avgRating} stars</h3>
     </div>

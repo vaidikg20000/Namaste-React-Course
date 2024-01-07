@@ -47,11 +47,11 @@ const Body = () => {
     </>
   ) : (
     <>
-      <div className="search-container">
+      <div className="search-container p-5 bg-pink-50 my-5">
         <input
           type="text"
           placeholder="Search"
-          className="search-input"
+          className="focus:bg-slate-100 p-2"
           value={searchInput}
           onChange={(e) => {
             // e.target.value => whatever you write in input
@@ -63,11 +63,12 @@ const Body = () => {
             const data = filterData(searchInput, allRestaurants);
             setFilteredRestaurantData(data);
           }}
+          className="p-2 m-2 bg-purple-800 hover:bg-gray-700 text-white rounded"
         >
           Search
         </button>
       </div>
-      <div className="restaurant-list">
+      <div className="flex flex-wrap">
         {filteredRestaurants.map((restaurant) => {
           return (
             <Link

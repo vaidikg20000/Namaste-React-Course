@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* 
 .header{
     display: flex;
     justify-content: space-between;
@@ -28,7 +32,6 @@
 .shimmer-card{
     width: 200px;
     height: 200px;
-    /* border: 1px solid black; */
     background: lightgray;
     padding: 10px;
     margin: 10px;
@@ -41,4 +44,4 @@
 .restaurant-list{
     display: flex;
     flex-wrap: wrap;
-}
+} */
