@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { restaurantList } from "../constants";
+import useOnline from "../../utils/useOnline";
+import { restaurantList } from "../../utils/constants";
 import { RestaurantCard } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import {Link} from "react-router-dom";
@@ -25,11 +26,17 @@ const Body = () => {
     );
     const json = await data.json();
     console.log(json,'llll');
-    setAllRestaurantData(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setFilteredRestaurantData(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setAllRestaurantData(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilteredRestaurantData(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   }
   // Not render component (early return)
   if (!allRestaurants) return null;
+
+  const online = useOnline();
+
+  if(!online){
+    return <h1>You are offline, check internet connection</h1>
+  }
 
   // if (filteredRestaurants.length === 0)
   //   return <h1>No Matching restaurants found</h1>;

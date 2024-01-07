@@ -1,5 +1,5 @@
 import React from "react";
-import { restaurantList } from "../constants";
+import { restaurantList } from "../../utils/constants";
 restaurantList;
 
 const Shimmer = () => {

@@ -1,4 +1,4 @@
-import { IMG_CDN_LINK } from "../constants";
+import { IMG_CDN_LINK } from "../../utils/constants";
 export const RestaurantCard = ({
   cloudinaryImageId,
   name,
