@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../../utils/userContext";
 
 export const Title = () => (
   <a href="/">
@@ -13,6 +14,7 @@ export const Title = () => (
 //Functional Component
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const {user} = useContext(UserContext);
   return (
     <div className="flex justify-between">
       {/* {Title()} */}
@@ -35,6 +37,7 @@ const Header = () => {
           </li>
         </ul>
       </div>
+      <h1 className="p-10 font-bold text-red-900">{user.name}</h1>
       {isLoggedIn ? (
         <button onClick={() => setIsLoggedIn(false)}>Login</button>
       ) : (

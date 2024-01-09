@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import useOnline from "../../utils/useOnline";
 import { restaurantList } from "../../utils/constants";
 import { RestaurantCard } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import UserContext from "../../utils/userContext";
 
 function filterData(input, restaurants) {
   return restaurants.filter((restaurant) =>
@@ -16,6 +17,8 @@ const Body = () => {
   const [allRestaurants, setAllRestaurantData] = useState([]);
   const [filteredRestaurants, setFilteredRestaurantData] = useState([]);
 
+  const { user, setUser } = useContext(UserContext);
+
   useEffect(() => {
     getRestaurants();
   }, []);
@@ -25,17 +28,21 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0136879&lng=73.02318629999999&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log(json,'llll');
-    setAllRestaurantData(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setFilteredRestaurantData(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    console.log(json, "llll");
+    setAllRestaurantData(
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setFilteredRestaurantData(
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   }
   // Not render component (early return)
   if (!allRestaurants) return null;
 
   const online = useOnline();
 
-  if(!online){
-    return <h1>You are offline, check internet connection</h1>
+  if (!online) {
+    return <h1>You are offline, check internet connection</h1>;
   }
 
   // if (filteredRestaurants.length === 0)
@@ -67,6 +74,20 @@ const Body = () => {
         >
           Search
         </button>
+        <input
+          className=""
+          value={user.name}
+          onChange={(e) => {
+            setUser({...user, name: e.target.value });
+          }}
+        />
+        <input
+          className=""
+          value={user.email}
+          onChange={(e) => {
+            setUser({ ...user, email: e.target.value });
+          }}
+        />
       </div>
       <div className="flex flex-wrap">
         {filteredRestaurants.map((restaurant) => {
@@ -75,7 +96,11 @@ const Body = () => {
               to={"/restaurant/" + restaurant.info.id}
               key={restaurant.info.id}
             >
-              <RestaurantCard {...restaurant.info} key={restaurant.info.id} />{" "}
+              <RestaurantCard
+                user={user}
+                {...restaurant.info}
+                key={restaurant.info.id}
+              />{" "}
             </Link>
           );
         })}
